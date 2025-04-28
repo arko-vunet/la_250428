@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Cell Height variations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .radio-group label {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="h-screen w-screen bg-white flex flex-col">
+    <div class="border-b border-gray-200 flex items-center justify-start p-2 h-[37px] text-sm text-white bg-teal-800">
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="viewOption" value="current" checked>
+                Current
+            </label>
+            <label>
+                <input type="radio" name="viewOption" value="proposed">
+                Proposed
+            </label>
+            <label>
+                <input type="radio" name="viewOption" value="proposed_compact">
+                Proposed (Compact)
+            </label>
+        </div>
+    </div>
+    <div class="flex-1 flex items-start justify-center overflow-hidden">
+        <img id="displayImage" src="images/current.png" class="w-full h-auto object-cover object-top" alt="Table View"
+            style="max-height: calc(100vh - 37px);" />
+    </div>
+
+    <script>
+        const radioButtons = document.querySelectorAll('input[name="viewOption"]');
+        const displayImage = document.getElementById('displayImage');
+
+        const imagePaths = {
+            'current': 'images/current.png',
+            'proposed': 'images/proposed_default.png',
+            'proposed_compact': 'images/proposed_compact.png'
+        };
+
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function () {
+                displayImage.src = imagePaths[this.value];
+            });
+        });
+    </script>
+</body>
+
+</html>
